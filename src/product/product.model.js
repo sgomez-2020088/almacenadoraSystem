@@ -35,6 +35,10 @@ const productSchema = new Schema({
         ref: 'User',
         required: [true, 'In charge is required']
     },
+    status: {
+        type: Boolean,
+        default: true
+    }
 })
 
 export default model('Product', productSchema)
