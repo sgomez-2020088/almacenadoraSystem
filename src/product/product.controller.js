@@ -60,6 +60,9 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         const { id } = req.body
+        const {productConfirmation} = req.body
+        if(productConfirmation != id) return res.status(400).send({message: 'Confirmation id does not match', success: false})
+
         const product = await Product.findByIdAndUpdate(id, { status: false }, { new: true })
         if (!product) return res.status(404).send({ message: 'Product not found', success: false })     
         return res.send({ message: 'Product deleted successfully', success: true, product })
