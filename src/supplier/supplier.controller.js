@@ -17,7 +17,9 @@ export const addSupplier = async (req, res) =>{
 export const getAll = async (req, res) =>{
     try {
         
-        const suppliers = await Supplier.find()
+        const suppliers = await Supplier.find({
+            status: {$ne: false }}
+        )
         if(suppliers.length === 0) return res.status(400).send({message: 'Suppliers not found', success: false})
             return res.send({message: 'Suppliers found', success: true, suppliers})
     } catch (err) {
@@ -26,17 +28,30 @@ export const getAll = async (req, res) =>{
     }    
 }
 
-export const updateCategory = async (req, res) => {
+export const updateSupplier = async (req, res) => {
     try {
-        const categoryId = req.body.id 
-        const  data = req.body
+        const { id } = req.body
+        const data = req.body
+        const updated = await Supplier.findByIdAndUpdate(id, data, { new: true })
 
-        const updateCategory = await Category.findByIdAndUpdate(categoryId, data, {new:true})
-        if(!updateCategory) return res.status(404).send({message: 'Category not found', success: false})
-            return res.send({message: 'Category updated succesfully', category: updateCategory, success: true})
+        if (!updated) return res.status(404).send({ message: 'Supplier not found', success: false })
 
+        return res.send({ message: 'Supplier updated successfully', success: true, supplier: updated })
     } catch (err) {
         console.error(err)
-        res.status(500).send({message: 'General error', success: false})
+        res.status(500).send({ message: 'General error updating supplier' })
+    }
+}
+
+export const deleteSupplier = async (req, res) => {
+    try {
+        const { id } = req.body
+        const supplier = await Supplier.findByIdAndUpdate(id, { status: false }, { new: true })
+        if (!supplier) return res.status(404).send({ message: 'Supplier not found', success: false })
+
+        return res.send({ message: 'Supplier deleted successfully', success: true, supplier })
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({ message: 'General error deleting supplier', success: false })
     }
 }
