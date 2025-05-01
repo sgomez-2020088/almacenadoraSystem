@@ -35,3 +35,11 @@ export const deleteCategoryValidator = [
     body('id','Id category is necesary').notEmpty(),
     validateErrors
 ]
+
+export const addSupplierValidator = [
+    body('name', 'Name cannot be empty').notEmpty(),
+    body('contactEmail', 'Email cannot be empty').notEmpty().isEmail(),
+    body('contactPhone', 'Phone cannot be empty').notEmpty().isMobilePhone(),
+    body('product', 'Product name cannot be empty').notEmpty(),
+    validateErrors
+]
