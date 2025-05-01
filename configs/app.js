@@ -10,6 +10,7 @@ import authRoutes from '../src/auth/auth.routes.js'
 import categoryRoutes from '../src/category/category.routes.js'
 import  {createDefaultAdmin} from '../configs/setUpData.js'
 import supplierRoutes from '../src/supplier/supplier.routes.js'
+import customerRoutes from '../src/customer/customer.routes.js'
 
 
 const configs = (app)=>{
@@ -25,6 +26,7 @@ const routes = (app)=>{
     app.use('/v1/auth', authRoutes)
     app.use('/v1/category', categoryRoutes)
     app.use('/v1/supplier', supplierRoutes)
+    app.use('/v1/customer', customerRoutes)
 
 }
 
