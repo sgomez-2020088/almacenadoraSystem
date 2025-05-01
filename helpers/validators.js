@@ -1,6 +1,6 @@
-import { body } from 'express-validator' 
+import { body, ExpressValidator } from 'express-validator' 
 import { validateErrors} from './validate.errors.js'
-import { exitEmailUser } from './db.validators.js'
+import { exitEmailUser, exitEmailCustomer, exitEmailSupplier } from './db.validators.js'
 
 export const registerValidator = [
     body('name', 'Name cannot be empty').notEmpty(),
@@ -38,7 +38,7 @@ export const deleteCategoryValidator = [
 
 export const addSupplierValidator = [
     body('name', 'Name cannot be empty').notEmpty(),
-    body('contactEmail', 'Email cannot be empty').notEmpty().isEmail(),
+    body('contactEmail', 'Email cannot be empty').notEmpty().isEmail().custom(exitEmailSupplier),
     body('contactPhone', 'Phone cannot be empty').notEmpty().isMobilePhone(),
     body('product', 'Product name cannot be empty').notEmpty(),
     validateErrors
@@ -57,3 +57,25 @@ export const deleteSupplierValidator = [
     body('id','You must need a supplier ID').notEmpty(),
     validateErrors
 ]
+
+export const addCustomerValidator = [
+    body('name', 'Name cannot be empty').notEmpty(),
+    body('email', 'Email cannot be empty').notEmpty().isEmail().custom(exitEmailCustomer),
+    body('phone', 'Phone cannot be empty').notEmpty().isMobilePhone(),
+    body('product', 'Product name cannot be empty').notEmpty(),
+    validateErrors
+]
+
+export const updateCustomerValidator = [
+    body('id','You must need a customer ID').optional().notEmpty(),
+    body('name', 'Name cannot be empty').optional().notEmpty(),
+    body('email', 'Email cannot be empty').optional().notEmpty().isEmail(),
+    body('phone', 'Phone cannot be empty').optional().notEmpty().isMobilePhone(),
+    body('product', 'Product name cannot be empty').optional().notEmpty(),
+    validateErrors
+]
+
+export const deleteCustomerValidator = [
+    body('id','You must need a customer ID').notEmpty(),
+    validateErrors
+]   
