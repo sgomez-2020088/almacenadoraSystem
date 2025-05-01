@@ -43,3 +43,17 @@ export const addSupplierValidator = [
     body('product', 'Product name cannot be empty').notEmpty(),
     validateErrors
 ]
+
+export const UpdateSupplierValidator = [
+    body('id','You must need a supplier ID').optional().notEmpty(),
+    body('name', 'Name cannot be empty').optional().notEmpty(),
+    body('contactEmail', 'Email cannot be empty').optional().notEmpty().isEmail(),
+    body('contactPhone', 'Phone cannot be empty').optional().notEmpty().isMobilePhone(),
+    body('product', 'Product name cannot be empty').optional().notEmpty(),
+    validateErrors
+]
+
+export const deleteSupplierValidator = [
+    body('id','You must need a supplier ID').notEmpty(),
+    validateErrors
+]
