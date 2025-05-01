@@ -7,11 +7,6 @@ const supplierSchema = new Schema({
             required: [true, 'Name is required'],
             maxLength: [25, 'Can´t be overcome 25 characters']
         },
-        surname: {
-            type: String,
-            required: [true, 'Surname is required'],
-            maxLength: [25, 'Can´t be overcome 25 characters']
-        },
         contactEmail: {
             type: String,
             unique: true,
