@@ -1,4 +1,6 @@
 import User from '../src/user/user.model.js'
+import Customer from '../src/customer/customer.model.js'
+import Supplier from '../src/supplier/supplier.model.js'
 
 export const exitEmailUser = async(email)=>{
     const alreadyEmail = await User.findOne({email})
@@ -7,6 +9,7 @@ export const exitEmailUser = async(email)=>{
         throw new Error(`Email ${email} is already`)
     }
 }
+
 
 export const findUser = async(id)=>{
     try{
@@ -19,3 +22,18 @@ export const findUser = async(id)=>{
     }
 }
 
+export const exitEmailCustomer = async(email)=>{
+    const alreadyEmail = await Customer.findOne({email})
+    if(alreadyEmail){
+        console.error(`Email ${email} is already`)
+        throw new Error(`Email ${email} is already`)
+    }
+}
+
+export const exitEmailSupplier = async(contactEmail)=>{
+    const alreadyEmail = await Supplier.findOne({contactEmail})
+    if(alreadyEmail){
+        console.error(`Email ${contactEmail} is already`)
+        throw new Error(`Email ${contactEmail} is already`)
+    }
+}
