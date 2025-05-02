@@ -79,3 +79,66 @@ export const deleteCustomerValidator = [
     body('id','You must need a customer ID').notEmpty(),
     validateErrors
 ]   
+
+export const addReportValidator = [
+    body('type', 'Type cannot be empty').notEmpty().isIn(['ENTRY', 'EXIT']).withMessage('Type must be ENTRY or EXIT'),
+    body('quantity', 'Quantity cannot be empty or must be a number').notEmpty().isNumeric(),
+    body('product', 'Product cannot be empty').notEmpty(),
+    validateErrors
+]
+
+export const addProductValidator = [
+    body('name', 'Name cannot be empty').notEmpty(),
+    body('category', 'Category cannot be empty').notEmpty(),
+    body('price', 'Price cannot be empty').notEmpty().isNumeric(),
+    body('stock', 'Stock cannot be empty').notEmpty().isNumeric(),
+    body('supplier', 'Supplier cannot be empty').notEmpty(),
+    body('entryDate', 'Entry date cannot be empty').notEmpty().isDate(),
+    validateErrors
+]
+
+export const updateProductValidator = [
+    body('id','You must need a product ID').optional().notEmpty(),
+    body('name', 'Name cannot be empty').optional().notEmpty(),
+    body('price', 'Price cannot be empty').optional().notEmpty().isNumeric(),
+    body('stock', 'Stock cannot be empty').optional().notEmpty().isNumeric(),
+    body('entryDate', 'Entry date cannot be empty').optional().notEmpty().isDate(),
+    validateErrors
+]
+
+export const deleteProductValidator = [
+    body('id','ID cannot be empty').notEmpty(),
+    body('productConfirmation','Product confirmation cannot be empty').notEmpty(),
+    validateErrors
+]
+
+export const productCategoryValidator = [
+    body('category','ID cannot be empty').notEmpty(),
+    validateErrors
+]
+
+export const productNameValidator = [  
+    body('name','Name cannot be empty').notEmpty(),
+    validateErrors
+]
+
+export const productDateValidator = [
+    body('date','Date cannot be empty').notEmpty().isDate(),
+    validateErrors
+]
+
+export const productStockValidator = [
+    body('productId','Product ID cannot be empty').notEmpty(),
+    validateErrors
+]
+
+
+
+
+
+
+
+
+
+
+
