@@ -115,8 +115,9 @@ export const getByDate = async (req, res) =>{
     try {
         const {date} = req.body
         const products = await Product.find({
-            entryDate: { $gte: date},
+            entryDate: { $gte: date}, //Greater Than or Equal 
             status: {$ne: false}
+
         }).populate('category', 'name -_id')
         .populate('supplier', 'name -_id')
         .populate('incharge', 'name surname -_id')
@@ -126,5 +127,28 @@ export const getByDate = async (req, res) =>{
     } catch (err) {
         console.error(err)
         return res.status(500).send({message: 'General error getting products by date', success: false})
+    }
+}
+
+export const getStockProducto = async (req, res) => {
+    try {
+        const { productId } = req.body
+        const product = await Product.findById(productId)
+        if (!product) return res.status(404).send({message: 'Product not found', success: false})   
+
+        return res.send({message: 'Product found, Stock of', product: product.name, stock: product.stock,  success: true,})
+
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message: 'General error getting stock', success: false})
+    }
+}
+
+export const getAllStock = async (req, res) => {
+    try {
+        
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message: 'General error getting all stock', success: false})
     }
 }
