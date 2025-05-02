@@ -1154,6 +1154,50 @@
 					"response": []
 				},
 				{
+					"name": "getDatePeriode",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "initial",
+									"value": "2025-05-01",
+									"type": "text"
+								},
+								{
+									"key": "final",
+									"value": "2025-05-03",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3601/v1/report/date",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"report",
+								"date"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getEntryReports",
 					"request": {
 						"method": "GET",

@@ -301,3 +301,63 @@ export const getOneReport = async (req, res) => {
         
     }
 }
+
+export const getByDate = async (req, res) => {
+    try {
+        const { initial, final} = req.body
+
+        if (!initial || !final) {
+            return res.status(400).send(
+                { 
+                    message: 'Initial and final date are required', 
+                    success: false 
+                }
+            )
+        }
+        
+        const reports = await reportModel.find(
+            {
+                date:{
+                    $gte: new Date(initial),
+                    $lte: new Date(final)
+                }
+            }
+        ).populate(
+            {
+                path: 'product',
+                select: 'name'
+            },
+        ).populate(
+            {
+                path: 'user',
+                select: 'name email role'
+            }
+        )
+
+        if(!reports) {
+            return res.status(404).send(
+                { 
+                    message: 'Reports not found', 
+                    success: false 
+                }
+            )
+        }
+
+        return res.send(
+            {
+                success: true,
+                message: 'Reports found', 
+                total: reports.length,
+                reports
+            }
+        )
+
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send(
+            { 
+                message: 'General error getting report' 
+            }
+        )
+    }
+}
