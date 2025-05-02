@@ -72,3 +72,22 @@ export const deleteProduct = async (req, res) => {
         return res.status(500).send({ message: 'General error deleting product', success: false })
     }   
 }
+
+export const getByCategory = async (req, res) =>{
+    try {
+        const { categoryId } = req.body
+        const products = await Product.find({
+            category: categoryId,
+            status: { $ne: false }
+        }).populate('category', 'name -_id')
+        .populate('supplier', 'name -_id')
+        .populate('incharge', 'name surname -_id')
+        
+        if (products.length === 0) return res.status(400).send({message: 'Products not found', success: false})
+            return res.send({message: 'Products found', success: true, products})
+
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message: 'General error getting products by category', success: false})
+    }
+}
