@@ -12,6 +12,7 @@ import  {createDefaultAdmin} from '../configs/setUpData.js'
 import supplierRoutes from '../src/supplier/supplier.routes.js'
 import customerRoutes from '../src/customer/customer.routes.js'
 import productRoutes from '../src/product/product.routes.js'
+import reportRoutes from '../src/report/report.routes.js'
 
 
 const configs = (app)=>{
@@ -29,6 +30,7 @@ const routes = (app)=>{
     app.use('/v1/supplier', supplierRoutes)
     app.use('/v1/customer', customerRoutes)
     app.use('/v1/product', productRoutes)
+    app.use('/v1/report', reportRoutes)
 
 }
 
