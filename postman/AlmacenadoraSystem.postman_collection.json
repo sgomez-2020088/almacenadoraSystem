@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "95001d4e-10b1-4e1a-87bb-c3576041c908",
+		"_postman_id": "9757b146-3091-47f3-82c3-40e8168fb16a",
 		"name": "AlmacenadoraSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37951891"
+		"_exporter_id": "37951897"
 	},
 	"item": [
 		{
@@ -92,6 +92,12 @@
 								},
 								{
 									"key": "userInformation",
+									"value": "admin@default.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "userInformation",
 									"value": "sgomaz@gmail.com",
 									"type": "text"
 								}
@@ -133,7 +139,7 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Tecnologia 3",
+									"value": "Tecnologia 41",
 									"type": "text"
 								},
 								{
@@ -848,7 +854,7 @@
 							"urlencoded": [
 								{
 									"key": "date",
-									"value": "2025-05-02",
+									"value": "2025-05-01",
 									"type": "text"
 								}
 							]
@@ -910,6 +916,74 @@
 					"response": []
 				},
 				{
+					"name": "Get All Stock",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3601/v1/product/allStock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"product",
+								"allStock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Invetory Total",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3601/v1/product/inventory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"product",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update Product",
 					"request": {
 						"method": "PUT",
@@ -941,7 +1015,7 @@
 								},
 								{
 									"key": "price",
-									"value": "1500",
+									"value": "1200",
 									"type": "text"
 								},
 								{
@@ -1148,50 +1222,6 @@
 								"v1",
 								"report",
 								"all"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getDatePeriode",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "initial",
-									"value": "2025-05-01",
-									"type": "text"
-								},
-								{
-									"key": "final",
-									"value": "2025-05-03",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "localhost:3601/v1/report/date",
-							"host": [
-								"localhost"
-							],
-							"port": "3601",
-							"path": [
-								"v1",
-								"report",
-								"date"
 							]
 						}
 					},
