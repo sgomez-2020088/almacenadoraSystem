@@ -1,4 +1,7 @@
 import Product from './product.model.js'
+import Category from '../category/category.model.js'    
+import { Types } from 'mongoose'
+
 
 export const addProduct = async (req, res) => {
     try {
@@ -76,6 +79,12 @@ export const deleteProduct = async (req, res) => {
 export const getByCategory = async (req, res) =>{
     try {
         const { categoryId } = req.body
+        
+        const categoryFind = await Category.findById(categoryId)
+        if (!categoryFind) 
+            return res.status(404).send({message: 'Category not found', success: false})
+        
+        
         const products = await Product.find({
             category: categoryId,
             status: { $ne: false }
@@ -95,6 +104,10 @@ export const getByCategory = async (req, res) =>{
 export const getByName = async (req, res) =>{
     try {
         const {name} = req.body
+
+        if (!name || name.trim().length === 0) 
+            return res.status(400).send({message: 'Invalid name', success: false})
+
         const products = await Product.find({
             name: { $regex: name, $options: 'i' },
             status: { $ne: false }
@@ -114,8 +127,14 @@ export const getByName = async (req, res) =>{
 export const getByDate = async (req, res) =>{
     try {
         const {date} = req.body
+
+        const yesDate = new Date(date)
+        if (!date || isNaN(yesDate.getTime())) 
+            return res.status(400).send({message: 'Invalid date, use format YYYY-MM-DD',success: false})
+        
+        
         const products = await Product.find({
-            entryDate: { $gte: date}, //Greater Than or Equal 
+            entryDate: { $eq: date}, 
             status: {$ne: false}
 
         }).populate('category', 'name -_id')
@@ -133,6 +152,7 @@ export const getByDate = async (req, res) =>{
 export const getStockProducto = async (req, res) => {
     try {
         const { productId } = req.body
+
         const product = await Product.findById(productId)
         if (!product) return res.status(404).send({message: 'Product not found', success: false})   
 
@@ -146,9 +166,42 @@ export const getStockProducto = async (req, res) => {
 
 export const getAllStock = async (req, res) => {
     try {
-        
+        const result = await Product.aggregate([
+            { $match: { status: true } }, 
+            { $group: { _id: null, totalStock: { $sum: '$stock' } } }
+        ])
+
+        const total = result.length > 0 ? result[0].totalStock : 0
+
+        return res.send({ message: 'Total stock get successfully', totalStock: total, success: true})
+
     } catch (err) {
         console.error(err)
         return res.status(500).send({message: 'General error getting all stock', success: false})
+    }
+}
+
+export const getInvetory = async (req, res) => {
+    try {
+        const result = await Product.aggregate([
+            { $match: { status: true } }, 
+            {
+                $group: {
+                    _id: null,
+                    totalValue: {
+                        $sum: { $multiply: ['$stock', '$price'] }
+                    }
+                }
+            }
+        ])
+
+        const value = result.length > 0 ? result[0].totalValue : 0
+
+        return res.send({
+            message: 'Total inventory successfully', totalInventory: value, success: true})
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message: 'General error getting inventory', success: false})
+        
     }
 }
