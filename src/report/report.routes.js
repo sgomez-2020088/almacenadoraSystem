@@ -1,12 +1,7 @@
 import { Router } from "express"
 import { validateJwt,isAdmin } from "../../middlewares/validate.jwt.js"
-import { addRegistry, getAllReports, getEntryReports, getExitReports, getOneReport } from "./report.controller.js"
+import { addRegistry,getByDate, getAllReports, getEntryReports, getExitReports, getOneReport } from "./report.controller.js"
 import { addReportValidator } from "../../helpers/validators.js"
-
-import { Router } from "express";
-import { validateJwt } from "../../middlewares/validate.jwt.js";
-import { addRegistry, getAllReports, getByDate, getEntryReports, getExitReports, getOneReport } from "./report.controller.js";
-
 
 const api = Router()
 
