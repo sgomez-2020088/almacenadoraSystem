@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6e7a5eec-f808-4cc7-bba1-e91f09466f89",
+		"_postman_id": "95001d4e-10b1-4e1a-87bb-c3576041c908",
 		"name": "AlmacenadoraSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37951897"
+		"_exporter_id": "37951891"
 	},
 	"item": [
 		{
@@ -1015,6 +1015,217 @@
 								"v1",
 								"product",
 								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "REPORT",
+			"item": [
+				{
+					"name": "Add EntryReport",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "ENTRY",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "product",
+									"value": "68142d1e35632f835632ad36",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3601/v1/report/",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"report",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add ExitReport",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "EXIT",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "product",
+									"value": "68142d1e35632f835632ad36",
+									"type": "text"
+								},
+								{
+									"key": "motive",
+									"value": "pq si",
+									"type": "text"
+								},
+								{
+									"key": "destination",
+									"value": "mikasa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3601/v1/report/",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"report",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllReports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3601/v1/report/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"report",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEntryReports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3601/v1/report/entry",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"report",
+								"entry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExitReports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3601/v1/report/exit",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"report",
+								"exit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOneReport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3601/v1/report/68142df16016b45e8945222e",
+							"host": [
+								"localhost"
+							],
+							"port": "3601",
+							"path": [
+								"v1",
+								"report",
+								"68142df16016b45e8945222e"
 							]
 						}
 					},
