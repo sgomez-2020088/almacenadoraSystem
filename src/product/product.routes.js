@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { addProduct, getAll, updateProduct, deleteProduct } from './product.controller.js'
+import { addProduct, getAll, updateProduct, deleteProduct,getByCategory } from './product.controller.js'
 import {validateJwt } from '../../middlewares/validate.jwt.js'
 
 const api = Router()
@@ -10,6 +10,8 @@ api.get('/all',[validateJwt],getAll)
 
 api.put('/update',[validateJwt],updateProduct)
 api.delete('/delete',[validateJwt],deleteProduct)
+
+api.get('/category',[validateJwt],getByCategory)
 
 export default api
 
