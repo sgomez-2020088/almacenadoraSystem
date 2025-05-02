@@ -12,7 +12,7 @@ export const createDefaultAdmin = async () => {
             const adminUser = new User({
                 name: "Admin",
                 surname: "Default",
-                username: "admin",
+                username: "ADMIN",
                 email: adminEmail,
                 password: hashedPassword,
                 role: "ADMIN",
